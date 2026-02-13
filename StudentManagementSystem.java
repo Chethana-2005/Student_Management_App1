@@ -1,0 +1,127 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Student {
+    int id;
+    String name;
+    int age;
+    String course;
+
+    Student(int id,String name,int age, String course) { 
+        this.id=id;
+        this.name=name;
+        this.age=age;
+        this.course = course;   
+    }
+
+
+    void display(){
+        System.out.println("ID: "+id);
+        System.out.println("Name: "+name);
+        System.out.println("Age: "+age);
+        System.out.println("course; "+course);
+        System.out.println("------------------");
+    }
+}
+
+class StudentManagementSystem {
+    
+    static ArrayList<Student> StudentList = new ArrayList<>();
+    static Scanner sc = new Scanner(System.in);
+        
+    public static void main(String[] args){
+
+        while(true) {
+            System.out.println("\n===== Student Management System ====");
+            System.out.println("1. Add Student");
+            System.out.println("2. view Students");
+            System.out.println("3. update Student");
+            System.out.println("4. Delete Student");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+
+            int choice = sc.nextInt();
+
+            switch(choice) {
+                case 1:
+                    addStudent();
+                    break;
+                case 2:
+                    viewStudents();
+                    break;
+                case 3:
+                    updateStudent();
+                case 4:
+                    deleteStudent();
+                    break;
+                case 5:
+                    System.out.println("Exiting... Thank you for using the Student Management System.");
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice. please try again.");
+            }
+        }
+    }
+
+    public static void addStudent(){
+        System.out.println("Enter student ID: ");
+        int id = sc.nextInt();
+        sc.nextLine();
+        System.out.println("Enter student name: ");
+        String name = sc.nextLine();
+        System.out.println("Enter student age: ");
+        String Name = sc.nextInt();
+        sc.nextLine();
+        System.out.println("Enter student course: ");
+        String course = sc.nextLine();
+        Student student = new Student(id,name,age,course);
+        StudentList.add(student);
+        System.out.println("Student added successfully.");
+}
+
+public static void viewStudent(){
+        if(StudentList.isEmpty()){
+            System.out.println("No students found.");
+        }else{
+            for(Student student : StudentList){
+                student.display();
+            }  
+        }
+    }
+
+    public static void updateStudent(){
+        System.out.println("Enter student ID to update:");
+        int id = sc.nextInt();
+        for(Student student : StudentList){
+            if(student.id == id){
+                System.out.println("Enter new name: ");
+                String name = sc.nextLine();
+                System.out.println("Enter new age: ");
+                int age = sc.nexLine();
+                System.out.println("Enter new name: ");
+                System.out.println("Enter new course: ");
+                String course = sc.nextLine();
+                student.name = name;
+                student.age = age;
+                student.course = course;   
+                System.out.println("Student updated successfully.");
+                return;             
+            }
+        }
+        System.out.println("Student not found.");
+    }
+
+    public static void deleteStudent(){
+        System.out.println("Enter student ID to delete: ");
+        int id = sc.nextInt();
+        sc.nextLine();
+        for(Student student : StudentList){
+            if(student.id == id){
+                StudentList.remove(student);
+                System.out.println("Student deleted successfully.");
+                return;
+            }
+        }
+        System.out.println("Student not found.");
+    } 
+}
